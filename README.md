@@ -3,6 +3,6 @@
 
 ## About:
 - Fall 2020 school year
-- This is for CSCI437 Labs
+- This is for CSCI437 Labs for partners
 
 
