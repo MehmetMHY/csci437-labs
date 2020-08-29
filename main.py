@@ -52,6 +52,7 @@ def recedeSqaure(video_file):
 
         cv2.putText(bgr_image, text=str(frame), org=(20, 50), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.5, color=(0,255,0))
         
+        #cv2.namedWindow("Lab 1: OpenCV-Python Basics", cv2.WINDOW_NORMAL)
         cv2.imshow("Lab 1: OpenCV-Python Basics", bgr_image)
 
         # Wait for xx msec (0 means wait till a keypress).
