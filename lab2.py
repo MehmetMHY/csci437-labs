@@ -34,10 +34,7 @@ print("-------------------------------------------------------------------------
 print("\n[ Q2-a: ]")
 tc_w = np.array([[10, -25, 40]]).T
 
-
-
-
-ax = 1.22
+ax = 1.22 # radians
 sx = math.sin(ax)
 cx = math.cos(ax)
 
@@ -47,9 +44,13 @@ R_c_w = Rx  # The only rotation is about x
 H_c_w = np.block([[R_c_w, tc_w], [0, 0, 0, 1]])  # Get as 4x4 matrix
 print("H_c_w:"), print(H_c_w)
 
+print("\n[ Q2-b: ]")
+
 # Get transformation from world to camera.
 H_w_c = np.linalg.inv(H_c_w)
 print("H_w_c:"), print(H_w_c)
+
+
 
 
 
