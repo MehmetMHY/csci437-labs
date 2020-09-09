@@ -22,7 +22,7 @@ print()
 print("ZYX:")
 
 print("\n[ Q1-b ]")
-print(np.matrix.transpose(R))
+print(np.matriclearx.transpose(R))
 print("           ⬆ Equal ⬇")
 print(np.linalg.inv(R))
 
