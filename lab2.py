@@ -1,5 +1,6 @@
+from PIL import Image
 import numpy as np
-import math
+import cv2
 
 ax, ay, az = 1.1, -0.5, 0.1 # radians
 
@@ -47,8 +48,11 @@ print("H_w_c:"), print(H_w_c)
 
 print("\n[ Q2-c: ]")
 f = 400
-cx = 256
-cy = 170
+columns = 256
+rows = 170
+cx = columns / 2
+cy = rows / 2
+
 K = np.array(((f, 0, cx), (0, f, cy), (0, 0, 1)))
 print("K = \n", str(K))
 
@@ -68,13 +72,6 @@ for i in range(len(P_w[0])):
     temp = temp / temp[2]
     final_points.append(temp)
 
-# EXAMPLE: 
-# print(P_w[ : , 0])
-# P_temp = (((6.8, -35.1, 42.0, 1)))
-# p = K @ Mext @ P_temp
-# p = p / p[2]
-# print("p:"), print(p)
-
 def print_list(theList, indent):
     if(indent): print()
     for i in range(len(theList)):
@@ -83,8 +80,37 @@ def print_list(theList, indent):
 
 print_list(final_points, True)
 
-image = np.zeros((cx,cy))
+image = np.zeros((rows,columns))
+roundedPoints = []
 for i in range(len(final_points)):
     x = int(round(final_points[i][0]))
     y = int(round(final_points[i][1]))
-    image[x][y] = 1
+    roundedPoints.append([y, x])
+    image[y][x] = 1
+
+img = Image.fromarray(image, "RGB")
+img.save("Q2_d.png")
+
+
+# Reading an image in default mode
+image = cv2.imread("Q2_d.png")
+
+radius = 1
+color = (255, 255, 255)
+thickness = -1
+
+for i in range(len(roundedPoints)):
+    point = (int(roundedPoints[i][1]), int(roundedPoints[i][0]))
+    image = cv2.circle(image, point, radius, color, thickness)
+
+cv2.imwrite("Q2_d.png", image)
+
+print("Created blank image and projected the 7 points. Check out Q2_d.png")
+
+print("\n[ Q3: ]")
+# for i in range(len(roundedPoints)-1):
+#     point1 = (int(roundedPoints[i][1]), int(roundedPoints[i][0]))
+#     point2 = (int(roundedPoints[i+1][1]), int(roundedPoints[i+1][0]))
+#     image = cv2.line(image, point1, point2, color, thickness, lineType=8)
+
+# cv2.imwrite("Q3.png", image)
