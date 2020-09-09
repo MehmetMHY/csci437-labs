@@ -1,4 +1,9 @@
-from PIL import Image
+# Title:    CSCI437 Lab 2
+# By:       Mehmet Yilmaz & Jean Denim
+# Date:     9-9-2020
+# Note:
+#   - Most of the code here was basically given to us from the lectures, thanks Dr. Hoff for the help
+
 import numpy as np
 import cv2
 
@@ -78,8 +83,6 @@ def print_list(theList, indent):
         print(theList[i])
     if(indent): print()
 
-print_list(final_points, True)
-
 image = np.zeros((rows,columns))
 roundedPoints = []
 for i in range(len(final_points)):
@@ -88,32 +91,30 @@ for i in range(len(final_points)):
     roundedPoints.append([y, x])
     image[y][x] = 1
 
-img = Image.fromarray(image, "RGB")
-img.save("Q2_d.png")
+img = cv2.imwrite('Q2_d.png', image)
 
-
-# Reading an image in default mode
 image = cv2.imread("Q2_d.png")
 
-radius = 1
+r = 1
 color = (255, 255, 255)
-thickness = 1
+tck = 1
 
 for i in range(len(roundedPoints)):
     point = (int(roundedPoints[i][1]), int(roundedPoints[i][0]))
-    image = cv2.circle(image, point, radius, color, thickness)
+    image = cv2.circle(image, point, r, color, tck)
 
 cv2.imwrite("Q2_d.png", image)
 
-print("Created blank image and projected the 7 points. Check out Q2_d.png")
+print("\n[ Q2-d: ]")
+print("Created blank image and projected the 7 points. Check out the Q2_d.png file.")
 
 print("-----------------------------------------------------------------------------------")
 print("\n[ Q3: ]")
 for i in range(len(roundedPoints)-1):
     point1 = (int(roundedPoints[i][1]), int(roundedPoints[i][0]))
     point2 = (int(roundedPoints[i+1][1]), int(roundedPoints[i+1][0]))
-    image = cv2.line(image, point1, point2, color, thickness)
-image = cv2.line(image, (154, 92), (226, 84), color, thickness)
+    image = cv2.line(image, point1, point2, color, tck)
+image = cv2.line(image, (154, 92), (226, 84), color, tck) # connect the final line
 
 cv2.imwrite("Q3.png", image)
-print("Lines have been drawn. Check out Q3.png \n")
+print("Lines have been drawn. Check out the Q3.png file.\n")
