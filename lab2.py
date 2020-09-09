@@ -107,6 +107,7 @@ cv2.imwrite("Q2_d.png", image)
 
 print("Created blank image and projected the 7 points. Check out Q2_d.png")
 
+print("-----------------------------------------------------------------------------------")
 print("\n[ Q3: ]")
 # for i in range(len(roundedPoints)-1):
 #     point1 = (int(roundedPoints[i][1]), int(roundedPoints[i][0]))
