@@ -97,7 +97,7 @@ image = cv2.imread("Q2_d.png")
 
 radius = 1
 color = (255, 255, 255)
-thickness = -1
+thickness = 1
 
 for i in range(len(roundedPoints)):
     point = (int(roundedPoints[i][1]), int(roundedPoints[i][0]))
@@ -109,9 +109,11 @@ print("Created blank image and projected the 7 points. Check out Q2_d.png")
 
 print("-----------------------------------------------------------------------------------")
 print("\n[ Q3: ]")
-# for i in range(len(roundedPoints)-1):
-#     point1 = (int(roundedPoints[i][1]), int(roundedPoints[i][0]))
-#     point2 = (int(roundedPoints[i+1][1]), int(roundedPoints[i+1][0]))
-#     image = cv2.line(image, point1, point2, color, thickness, lineType=8)
+for i in range(len(roundedPoints)-1):
+    point1 = (int(roundedPoints[i][1]), int(roundedPoints[i][0]))
+    point2 = (int(roundedPoints[i+1][1]), int(roundedPoints[i+1][0]))
+    image = cv2.line(image, point1, point2, color, thickness)
+image = cv2.line(image, (154, 92), (226, 84), color, thickness)
 
-# cv2.imwrite("Q3.png", image)
+cv2.imwrite("Q3.png", image)
+print("Lines have been drawn. Check out Q3.png \n")
