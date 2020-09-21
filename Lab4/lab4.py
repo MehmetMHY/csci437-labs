@@ -9,8 +9,12 @@ import numpy as np
 low_thresholds = [50, 50, 50]
 high_thresholds = [250, 250, 250]
 
-def main():
-    bgr_img = cv2.imread("stop0.jpg")
+def outputFinal(imageName):
+    outputFiltered = "filtered" + imageName[4] + ".png"
+    outputFile = "output" + imageName[4] + ".png"
+    print(outputFiltered, outputFile)
+
+    bgr_img = cv2.imread(imageName)
     image_height = bgr_img.shape[0]
     image_width = bgr_img.shape[1]
 
@@ -55,19 +59,22 @@ def main():
         thresh_img = cv2.bitwise_and(thresh_img, thresh_band_img)
 
         # Save picture after it has been threshold
-        output = cv2.imwrite("output0.png", thresh_img)
+        output = cv2.imwrite(outputFile, thresh_img)
 
         # Morphological closing and opening on binary picture.
-        morph()
+        # Read in oput images, but have to be manually edited.
+        binary_img = cv2.imread(outputFile)
 
-def morph():
-    # Read in oput images, but have to be manually edited.
-    binary_img = cv2.imread("output0.png")
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+        binary_img = cv2.morphologyEx(binary_img, cv2.MORPH_CLOSE, kernel)
+        binary_img = cv2.morphologyEx(binary_img, cv2.MORPH_OPEN, kernel)
+        filter = cv2.imwrite(outputFiltered, binary_img)
 
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-    binary_img = cv2.morphologyEx(binary_img, cv2.MORPH_CLOSE, kernel)
-    binary_img = cv2.morphologyEx(binary_img, cv2.MORPH_OPEN, kernel)
-    filter = cv2.imwrite("filtered0.png", binary_img)
+def main():
+    inputs = ["stop0.jpg", "stop1.jpg", "stop2.jpg", "stop3.jpg", "stop4.jpg"]
+    for i in range(len(inputs)):
+        outputFinal(inputs[i])
+    print("DONE!")
 
 if __name__ == "__main__":
     main()
