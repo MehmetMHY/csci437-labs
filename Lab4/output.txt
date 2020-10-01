@@ -1,0 +1,14 @@
+# CSCI 437 Lab 4 Final Thoughts
+- Date: 9-21-2020
+
+## Final Answers:
+1) Threshold values used for hue, stauration, and value:
+    [50, 50, 50]
+    [250, 250, 250]
+
+2) Size of the morphological structuring elements for closing and opening:
+
+Morph_Ellipse (5,5)
+
+* All the answers stated above can be seen in the lab4.py code on lines (9, 10, & 68)
+
