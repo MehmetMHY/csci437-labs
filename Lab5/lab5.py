@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import time
 
 
 # Mouse callback function
@@ -25,10 +26,16 @@ def create_named_window(window_name, image):
         scale = 1
     cv2.resizeWindow(winname=window_name, width=int(w * scale), height=int(h * scale))
 
+def swap(list, x, y):
+    temp = list[x]
+    list[x] = list[y]
+    list[y] = temp
+    return list
+
 def main():
     # Reading the two images and storing it in variables img and meme
     baseball = cv2.imread('baseball.jpg')
-    meme = cv2.imread('meme.jpg')
+    meme = cv2.imread('meme.png')
 
     # Create list.  The (x,y) points go in these lists.
     ptsA = []
@@ -45,15 +52,19 @@ def main():
     print("Click on points.  Hit ESC to exit.")
     while True:
         if cv2.waitKey(100) == 27:  # ESC is ASCII code 27
-            break
             print("PtsA:", ptsA)        # Print points to the console
+            break
+
+    temp = ptsA.copy()
+    temp = swap(temp, len(temp)-1, len(temp)-2)
+    ptsA2 = np.array(temp)
+    baseball = cv2.fillPoly(baseball, pts =[ptsA2], color=(0, 0, 0))
 
     height, width = baseball.shape[:2]
     h1, w1 = meme.shape[:2]
 
     pts1 = np.float32([[0, 0], [w1, 0], [0, h1], [w1, h1]])
     pts2 = np.float32(ptsA)
-
     h, mask = cv2.findHomography(pts1, pts2, cv2.RANSAC, 5.0)
 
     height, width, channels = baseball.shape
@@ -74,6 +85,7 @@ def main():
 
     # Using Bitwise or to merge the two images
     final = cv2.bitwise_or(bgr_output0, masked_image2)
+
     cv2.imwrite('final.png', final)
 
 if __name__ == "__main__":
