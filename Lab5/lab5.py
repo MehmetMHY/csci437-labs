@@ -38,7 +38,6 @@ def main():
     create_named_window("Image A", displayA)
     cv2.imshow("Image A", displayA)
 
-
     # Assign the mouse callback function, which collects (x,y) points.
     cv2.setMouseCallback("Image A", on_mouse=get_xy, param=("Image A", displayA, ptsA))
 
