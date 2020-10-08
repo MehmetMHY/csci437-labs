@@ -1,5 +1,5 @@
 # Title: CSCI 437 Lab 5
-# By: Denim Jean & Mehmet Yilmaz
+# By: Bao (Jean) Duong & Mehmet Yilmaz
 
 import numpy as np
 import cv2
