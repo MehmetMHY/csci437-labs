@@ -9,6 +9,7 @@ import sys
 import time
 import cv2
 import numpy as np
+import order_targets as ot
 
 # find the distance between two points
 def distance(px, py, x, y):
@@ -58,6 +59,8 @@ def main(video_file):
     # find connected components for all black blobs
     b_num_labels, b_labels_img, b_stats, b_centroids = cv2.connectedComponentsWithStats(cv2.bitwise_not(binary_img))
 
+    all_points = []
+
     # loop though every white and black blobs
     i = 0
     for stat, centroid in zip(w_stats, w_centroids):
@@ -86,13 +89,17 @@ def main(video_file):
             #   - check if the pixal point distance between white and balck is below the set threshold
             #   - check if the white and black blob's areas are at or below a set threshold
             if(c_dist <= c_thresh and distance(x_w, y_w, x_b, y_b) < d_thresh and (area_b <= b_ideal_area and area_w <= w_ideal_area)):
-                # draw rectangle on frame/image, for slected white blob (smaller area)
-                marking = cv2.rectangle(img=image, pt1=(x_w, y_w), pt2=(x_w + w_w, y_w + h_w),color=(0, 0, 255), thickness=1)
-                # draw rectangle on frame/image, for slected black blob (larger area)
-                marking = cv2.rectangle(img=image, pt1=(x_b, y_b), pt2=(x_b + w_b, y_b + h_b),color=(0, 0, 255), thickness=1)
+                all_points.append(np.array((x_w, y_w)))
             
             j = j + 1
         i = i + 1
+
+    all_points = list(ot.order_targets(all_points))
+
+    c = 0
+    for i in all_points:
+        marking = cv2.putText(image, text=str(c), org=(i[0], i[1]), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, color=(0, 0, 255))
+        c = c + 1
 
     cv2.imshow("HW2_P4", image)
     cv2.waitKey(30)
