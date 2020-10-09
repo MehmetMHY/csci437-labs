@@ -121,7 +121,7 @@ def main(video_file):
     pts = []
     for i in range(len(all_points)):
         pts.append(np.array(all_points[i], dtype="double"))
-    pts.append(np.array([1, 1], dtype="double"))    # added 1s to make it 6 rather then 5
+
     
     pts = np.row_stack((pts))
     pts = np.array(pts, dtype="double")
@@ -130,15 +130,17 @@ def main(video_file):
     yh = 4.55/2
 
     P_M = np.array([[-xh, -yh, 1], 
-                    [0, -yh,   2],
-                    [xh, -yh,  3],
-                    [-xh, yh,  4],
-                    [xh, yh,   5],
-                    [1, 1, 1]]) # added 1s to make it 6 rather then 5
+                    [0, -yh,   1],
+                    [xh, -yh,  1],
+                    [-xh, yh,  1],
+                    [xh, yh,   1]])
     P_M = np.array(P_M, dtype="double")
 
+    print(pts.shape)
+    print(P_M.shape)
+
     PoseFound, rvec, tvec = cv2.solvePnP(objectPoints=P_M, imagePoints=pts, cameraMatrix=K, distCoeffs=None)
-    print(PoseFound, rvec, tvec)
+    print(rvec)
 
 
 
