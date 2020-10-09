@@ -115,10 +115,10 @@ def main(video_file):
 
     K = np.array(((f, 0, cx), (0, f, cy), (0, 0, 1)))
 
-    P_M = np.column_stack((all_points))
-    P_M = np.vstack((np.array([0, 0, 0, 0, 0]), P_M))
-    P_M = np.vstack((P_M, np.array([1, 1, 1, 1, 1])))
-    print(P_M)
+    pts = np.column_stack((all_points))
+    #P_M = np.vstack((np.array([0, 0, 0, 0, 0]), P_M))
+    #P_M = np.vstack((P_M, np.array([1, 1, 1, 1, 1])))
+    print(pts)
 
 if __name__ == "__main__":
     main("CCCtarget.jpg")
