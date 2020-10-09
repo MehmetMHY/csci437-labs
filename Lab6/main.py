@@ -113,12 +113,27 @@ def main(video_file):
     cx = 354
     cy = 245
 
-    K = np.array(((f, 0, cx), (0, f, cy), (0, 0, 1)))
+    K = np.array(((f, 0, cx), (0, f, cy), (0, 0, 1)), dtype="double")
 
-    pts = np.column_stack((all_points))
-    #P_M = np.vstack((np.array([0, 0, 0, 0, 0]), P_M))
-    #P_M = np.vstack((P_M, np.array([1, 1, 1, 1, 1])))
-    print(pts)
+    pts = np.row_stack((all_points))
+    pts = np.array(pts, dtype="double")
+
+    xh = 7.4/2
+    yh = 4.55/2
+
+    P_M = np.array([[-xh, -yh, 1], 
+                    [0, -yh,   2],
+                    [xh, -yh,  3],
+                    [-xh, yh,  4],
+                    [xh, yh,   5]], dtype="double")
+
+    print(P_M.shape)
+    print(pts.shape)
+
+    PoseFound, rvec, tvec = cv2.solvePnP(objectPoints=P_M, imagePoints=pts, cameraMatrix=K, distCoeffs=None)
+    # print(PoseFound, rvec, tvec)
+
+
 
 if __name__ == "__main__":
     main("CCCtarget.jpg")
