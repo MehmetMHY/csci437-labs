@@ -1,9 +1,4 @@
-# Title: CSCI437 Homework 2 problem 4
-# Date:  9-28-2020
-# By:    Mehmet Yilmaz
-
-# Sources:
-#   1) "4-1 Binary Images" Lecture slides/notes
+# Lab 6 Code
 
 import sys
 import time
@@ -102,27 +97,19 @@ def main(video_file):
 
     c = 0
     for i in all_points:
-        marking = cv2.putText(image, text=str(c), org=(i[0], i[1]), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5,
+        marking = cv2.putText(image, text=str(c), org=(i[0], i[1]), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, thickness=2,
                               color=(0, 0, 255))
         c = c + 1
 
-    cv2.imshow("HW2_P4", image)
-    cv2.waitKey(30)
-
-    f = 715      # focal length in pixels
-    cx = 354
-    cy = 245
+    f = 531
+    cx = 320/2
+    cy = 240/2
 
     K = np.array(((f, 0, cx), (0, f, cy), (0, 0, 1)), dtype="double")
-
-    # pts = np.row_stack((all_points))
-    # pts = np.array(pts, dtype="double")
 
     pts = []
     for i in range(len(all_points)):
         pts.append(np.array(all_points[i], dtype="double"))
-
-    
     pts = np.row_stack((pts))
     pts = np.array(pts, dtype="double")
 
@@ -136,12 +123,30 @@ def main(video_file):
                     [xh, yh,   1]])
     P_M = np.array(P_M, dtype="double")
 
-    print(pts.shape)
-    print(P_M.shape)
-
     PoseFound, rvec, tvec = cv2.solvePnP(objectPoints=P_M, imagePoints=pts, cameraMatrix=K, distCoeffs=None)
-    print(rvec)
+    
+    W = np.amax(P_M,axis=0) - np.amin(P_M,axis=0)
+    L = np.linalg.norm(W)
+    d = L/5
 
+    pAxes = np.float32([[0, 0, 0], [d, 0, 0], [0, d, 0], [0, 0, d]])
+
+    pImg, J = cv2.projectPoints(objectPoints=pAxes, rvec=rvec, tvec=tvec, cameraMatrix=K, distCoeffs=None)
+
+    pImg = pImg.reshape(-1, 2)
+
+    cv2.line(image, tuple(np.int32(pImg[0])),tuple(np.int32(pImg[1])), (0, 0, 255), 3)
+    cv2.line(image, tuple(np.int32(pImg[0])),tuple(np.int32(pImg[2])), (0, 255, 0), 3)
+    cv2.line(image, tuple(np.int32(pImg[0])),tuple(np.int32(pImg[3])), (255, 0, 0), 3)
+
+    pose = []
+    for i in rvec:
+        temp = str("%.3f" % float(i))
+        pose.append(float(temp))
+
+    marking = cv2.putText(image, text=str("Pose: " + str(pose)), org=(50, 450), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.1, color=(255, 255, 255), thickness=2)
+    cv2.imshow("Lab 6", image)
+    cv2.waitKey(30)
 
 
 if __name__ == "__main__":
