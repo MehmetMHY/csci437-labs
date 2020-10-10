@@ -136,21 +136,17 @@ def main(video_file):
     cv2.line(image, tuple(np.int32(pImg[0])),tuple(np.int32(pImg[3])), (255, 0, 0), 3)
 
     pose = []
-
     rv = []
+    tv = []
     for i in rvec:
-        temp = str("%.3f" % float(i))
-        rv.append(float(temp))
-    
+        rv.append(float(str("%.2f" % float(i))))
     tv = []
     for i in tvec:
-        temp = str("%.3f" % float(i))
-        tv.append(float(temp))
-
+        tv.append(int(i))
     pose.append(rv) ; pose.append(tv)
 
-    marking = cv2.putText(image, text=str("rvec: " + str(pose[0])), org=(50, 400), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.1, color=(255, 255, 255), thickness=2)
-    marking = cv2.putText(image, text=str("tvec: " + str(pose[1])), org=(50, 450), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.1, color=(255, 255, 255), thickness=2)
+    marking = cv2.putText(image, text=str("rvec: " + str(pose[0])), org=(50, 450), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.1, color=(255, 255, 255), thickness=2)
+    marking = cv2.putText(image, text=str("tvec: " + str(pose[1])), org=(50, 400), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.1, color=(255, 255, 255), thickness=2)
 
     cv2.imshow("Lab 6", image)
     cv2.waitKey(30)
