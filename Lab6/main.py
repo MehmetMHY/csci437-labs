@@ -15,7 +15,6 @@ def distance(px, py, x, y):
     return np.linalg.norm(one - two)
 
 
-
 # determine the distance between two centroids
 def centroids_distance(centroid, centroid2):
     temp = centroid - centroid2
@@ -67,10 +66,14 @@ def main(video_file):
         j = 0
         for stat2, centroid2 in zip(b_stats, b_centroids):
             # get pixal coorindates for white and black plobs, for protential display boxing
-            x_w = stat[cv2.CC_STAT_LEFT]    ;   x_b = stat2[cv2.CC_STAT_LEFT]
-            y_w = stat[cv2.CC_STAT_TOP]     ;   y_b = stat2[cv2.CC_STAT_TOP]
-            w_w = stat[cv2.CC_STAT_WIDTH]   ;   w_b = stat2[cv2.CC_STAT_WIDTH]
-            h_w = stat[cv2.CC_STAT_HEIGHT]  ;   h_b = stat2[cv2.CC_STAT_HEIGHT]
+            x_w = stat[cv2.CC_STAT_LEFT];
+            x_b = stat2[cv2.CC_STAT_LEFT]
+            y_w = stat[cv2.CC_STAT_TOP];
+            y_b = stat2[cv2.CC_STAT_TOP]
+            w_w = stat[cv2.CC_STAT_WIDTH];
+            w_b = stat2[cv2.CC_STAT_WIDTH]
+            h_w = stat[cv2.CC_STAT_HEIGHT];
+            h_b = stat2[cv2.CC_STAT_HEIGHT]
 
             # get area(s) for the selected white and black blobs
             area_w = w_stats[i, cv2.CC_STAT_AREA]
@@ -94,12 +97,13 @@ def main(video_file):
 
     c = 0
     for i in all_points:
-        marking = cv2.putText(image, text=str(c), org=(i[0], i[1]), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, thickness=2, color=(0, 0, 255))
+        marking = cv2.putText(image, text=str(c), org=(i[0], i[1]), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5,
+                              thickness=2, color=(0, 0, 255))
         c = c + 1
 
     f = 531
-    cx = 320/2
-    cy = 240/2
+    cx = 320 / 2
+    cy = 240 / 2
 
     K = np.array(((f, 0, cx), (0, f, cy), (0, 0, 1)), dtype="double")
 
@@ -109,21 +113,21 @@ def main(video_file):
     pts = np.row_stack((pts))
     pts = np.array(pts, dtype="double")
 
-    xh = 7.4/2
-    yh = 4.55/2
+    xh = 7.4 / 2
+    yh = 4.55 / 2
 
-    P_M = np.array([[-xh, -yh, 1], 
-                    [0, -yh,   1],
-                    [xh, -yh,  1],
-                    [-xh, yh,  1],
-                    [xh, yh,   1]])
+    P_M = np.array([[-xh, -yh, 1],
+                    [0, -yh, 1],
+                    [xh, -yh, 1],
+                    [-xh, yh, 1],
+                    [xh, yh, 1]])
     P_M = np.array(P_M, dtype="double")
 
     PoseFound, rvec, tvec = cv2.solvePnP(objectPoints=P_M, imagePoints=pts, cameraMatrix=K, distCoeffs=None)
-    
-    W = np.amax(P_M,axis=0) - np.amin(P_M,axis=0)
+
+    W = np.amax(P_M, axis=0) - np.amin(P_M, axis=0)
     L = np.linalg.norm(W)
-    d = L/5
+    d = L / 5
 
     pAxes = np.float32([[0, 0, 0], [d, 0, 0], [0, d, 0], [0, 0, d]])
 
@@ -131,9 +135,9 @@ def main(video_file):
 
     pImg = pImg.reshape(-1, 2)
 
-    cv2.line(image, tuple(np.int32(pImg[0])),tuple(np.int32(pImg[1])), (0, 0, 255), 3)
-    cv2.line(image, tuple(np.int32(pImg[0])),tuple(np.int32(pImg[2])), (0, 255, 0), 3)
-    cv2.line(image, tuple(np.int32(pImg[0])),tuple(np.int32(pImg[3])), (255, 0, 0), 3)
+    cv2.line(image, tuple(np.int32(pImg[0])), tuple(np.int32(pImg[1])), (0, 0, 255), 3)
+    cv2.line(image, tuple(np.int32(pImg[0])), tuple(np.int32(pImg[2])), (0, 255, 0), 3)
+    cv2.line(image, tuple(np.int32(pImg[0])), tuple(np.int32(pImg[3])), (255, 0, 0), 3)
 
     pose = []
     rv = []
@@ -143,14 +147,15 @@ def main(video_file):
     tv = []
     for i in tvec:
         tv.append(int(i))
-    pose.append(rv) ; pose.append(tv)
+    pose.append(rv);
+    pose.append(tv)
 
-    marking = cv2.putText(image, text=str("rvec: " + str(pose[0])), org=(50, 450), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.1, color=(255, 255, 255), thickness=2)
-    marking = cv2.putText(image, text=str("tvec: " + str(pose[1])), org=(50, 400), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.1, color=(255, 255, 255), thickness=2)
+    marking = cv2.putText(image, text=str("rvec: " + str(pose[0])), org=(50, 450), fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+                          fontScale=1.1, color=(255, 255, 255), thickness=2)
+    marking = cv2.putText(image, text=str("tvec: " + str(pose[1])), org=(50, 400), fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+                          fontScale=1.1, color=(255, 255, 255), thickness=2)
 
-    cv2.imshow("Lab 6", image)
-    cv2.waitKey(30)
-
+    cv2.imwrite("output.png", image)
 
 if __name__ == "__main__":
     main("CCCtarget.jpg")
