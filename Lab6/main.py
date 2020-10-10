@@ -1,4 +1,5 @@
-# Lab 6 Code
+# Title: Lab 6 Code
+# Date:  10-9-2020
 
 import sys
 import time
@@ -12,6 +13,7 @@ def distance(px, py, x, y):
     one = np.array((px, py))
     two = np.array((x, y))
     return np.linalg.norm(one - two)
+
 
 
 # determine the distance between two centroids
@@ -40,11 +42,11 @@ def main(video_file):
     # apply adaptive thresholding to frame/image
     binary_img = cv2.adaptiveThreshold(
         src=gray_img,
-        maxValue=255,  # output value where condition met
+        maxValue=255,
         adaptiveMethod=cv2.ADAPTIVE_THRESH_MEAN_C,
-        thresholdType=cv2.THRESH_BINARY,  # threshold_type
-        blockSize=51,  # neighborhood size (a large odd number)
-        C=C_val)  # a constant to subtract from mean
+        thresholdType=cv2.THRESH_BINARY,
+        blockSize=51,
+        C=C_val)
 
     # clean up frame/image by applying opening and closing though a kernel (ksizexksize matrix box filter)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (ksize, ksize))
@@ -65,15 +67,10 @@ def main(video_file):
         j = 0
         for stat2, centroid2 in zip(b_stats, b_centroids):
             # get pixal coorindates for white and black plobs, for protential display boxing
-            x_w = stat[cv2.CC_STAT_LEFT]
-            y_w = stat[cv2.CC_STAT_TOP]
-            w_w = stat[cv2.CC_STAT_WIDTH]
-            h_w = stat[cv2.CC_STAT_HEIGHT]
-
-            x_b = stat2[cv2.CC_STAT_LEFT]
-            y_b = stat2[cv2.CC_STAT_TOP]
-            w_b = stat2[cv2.CC_STAT_WIDTH]
-            h_b = stat2[cv2.CC_STAT_HEIGHT]
+            x_w = stat[cv2.CC_STAT_LEFT]    ;   x_b = stat2[cv2.CC_STAT_LEFT]
+            y_w = stat[cv2.CC_STAT_TOP]     ;   y_b = stat2[cv2.CC_STAT_TOP]
+            w_w = stat[cv2.CC_STAT_WIDTH]   ;   w_b = stat2[cv2.CC_STAT_WIDTH]
+            h_w = stat[cv2.CC_STAT_HEIGHT]  ;   h_b = stat2[cv2.CC_STAT_HEIGHT]
 
             # get area(s) for the selected white and black blobs
             area_w = w_stats[i, cv2.CC_STAT_AREA]
@@ -97,8 +94,7 @@ def main(video_file):
 
     c = 0
     for i in all_points:
-        marking = cv2.putText(image, text=str(c), org=(i[0], i[1]), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, thickness=2,
-                              color=(0, 0, 255))
+        marking = cv2.putText(image, text=str(c), org=(i[0], i[1]), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, thickness=2, color=(0, 0, 255))
         c = c + 1
 
     f = 531
@@ -140,16 +136,29 @@ def main(video_file):
     cv2.line(image, tuple(np.int32(pImg[0])),tuple(np.int32(pImg[3])), (255, 0, 0), 3)
 
     pose = []
+
+    rv = []
     for i in rvec:
         temp = str("%.3f" % float(i))
-        pose.append(float(temp))
+        rv.append(float(temp))
+    
+    tv = []
+    for i in tvec:
+        temp = str("%.3f" % float(i))
+        tv.append(float(temp))
 
-    marking = cv2.putText(image, text=str("Pose: " + str(pose)), org=(50, 450), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.1, color=(255, 255, 255), thickness=2)
+    pose.append(rv) ; pose.append(tv)
+
+    marking = cv2.putText(image, text=str("rvec: " + str(pose[0])), org=(50, 400), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.1, color=(255, 255, 255), thickness=2)
+    marking = cv2.putText(image, text=str("tvec: " + str(pose[1])), org=(50, 450), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1.1, color=(255, 255, 255), thickness=2)
+
     cv2.imshow("Lab 6", image)
     cv2.waitKey(30)
 
 
 if __name__ == "__main__":
     main("CCCtarget.jpg")
-    print("[ Enter SPACE To Exit ]")
+    print("\n[ Enter SPACE To Exit ]\n")
     cv2.waitKey(0)
+
+
