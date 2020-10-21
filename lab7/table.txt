@@ -1,10 +1,10 @@
 Query image 2
 
   Ratio = 0.5: Recall = 0.399,  precision = 0.976
-  Ratio = 0.7: Recall = 0.479, precision = 0.947
-  Ratio = 0.8: Recall = 0.5, precision = 0.915
+  Ratio = 0.7: Recall = 0.479,  precision = 0.947
+  Ratio = 0.8: Recall = 0.5,    precision = 0.915
   Ratio = 0.9: Recall = 0.517,  precision = 0.792
-  Ratio = 1.0: Recall = 0.529,    precision = 0.478
+  Ratio = 1.0: Recall = 0.529,  precision = 0.478
 
 Query image 3
 
@@ -13,6 +13,22 @@ Query image 3
   Ratio = 0.8: Recall = 0.217,    precision = 0.708
   Ratio = 0.9: Recall = 0.263,    precision = 0.562
   Ratio = 1.0: Recall = 0.306,    precision = 0.305
+
+Query image 4
+
+  Ratio = 0.5: Recall = 0.00219, precision = 1.0
+  Ratio = 0.7: Recall = 0.0175,  precision = 0.533
+  Ratio = 0.8: Recall = 0.0438,  precision = 0.435
+  Ratio = 0.9: Recall = 0.0909,  precision = 0.291
+  Ratio = 1.0: Recall = 0.137,   precision = 0.125
+
+Query image 5
+
+  Ratio = 0.5: Recall = 0.0,      precision = 0.0
+  Ratio = 0.7: Recall = 0.00115,  precision = 0.0714
+  Ratio = 0.8: Recall = 0.00346,  precision = 0.05
+  Ratio = 0.9: Recall = 0.0115,   precision = 0.0446
+  Ratio = 1.0: Recall = 0.037,    precision = 0.032
 
 Query image 6
 
