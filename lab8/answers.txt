@@ -3,11 +3,14 @@
 2. 3 inlier matches were found.
 
 3. 
-Image	         Object is really      Program detected      Accuracy  
+
+Book1:
+
+Image	         Object is really      Program detected      
                  present (y/n)         the object (y/n)
 	
-TestImg01               y                     y               100.00
-TestImg02	        y	              y               100.00
+TestImg01               y                     y              
+TestImg02	        y	              y              
 TestImg03		n                     n
 TestImg04		y	              y
 TestImg05		n                     n
@@ -15,4 +18,30 @@ TestImg06		n                     n
 TestImg07		n                     n
 TestImg08		n                     n
 TestImg09		y                     n
-TestImg010		y	              y               71.43
+TestImg010		y	              y
+
+TP = 4
+TN = 5      
+Accuracy = 90%  
+
+-----------------------------------------------------------------------
+
+Book2:
+
+Image	         Object is really      Program detected      
+                 present (y/n)         the object (y/n)
+	
+TestImg01               y                     y              
+TestImg02	        n	              n              
+TestImg03		n                     n
+TestImg04		n	              n
+TestImg05		y                     y
+TestImg06		y                     y
+TestImg07		y                     y
+TestImg08		n                     n
+TestImg09		n                     n
+TestImg010		y	              y
+
+TP = 5
+TN = 5      
+Accuracy = 100%  
