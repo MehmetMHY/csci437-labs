@@ -72,6 +72,8 @@ def draw_square(image, x, y):
     cv2.rectangle(image, pt1=(x-15, y-15), pt2=(x+15, y+15), color=(0,0,255),thickness=3)
 
 def function(training, query):
+    print(query)
+
     #file_path = os.path.join(IMAGE_DIRECTORY, TRAINING_IMAGE_NAME)
     #assert(os.path.exists(file_path))
     bgr_train = cv2.imread(training)     # Get training image
@@ -121,7 +123,7 @@ def function(training, query):
     # Calculate an affine transformation from the training image to the query image.
     A_train_query, inliers = calc_affine_transformation(matches, kp_train, kp_query)
 
-    print(A_train_query)
+    #print(A_train_query)
 
     matches = [matches[i] for i in range(len(matches)) if inliers[i] == 1]
 
@@ -140,7 +142,7 @@ def function(training, query):
     temp = np.array([[300, 240], [300, 320], [460, 235]])
     temp = temp.T
 
-    print(temp)
+    #print(temp)
 
     temp1 = A_train_query * temp
     
@@ -169,6 +171,8 @@ def function(training, query):
         print("Object not detected; can't fit an affine transform")
     
     #cv2.waitKey(0)
+    print()
+    print()
 
 
 

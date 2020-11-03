@@ -1,0 +1,147 @@
+1) Threshold used: 15
+
+2) Images classified:
+./query_images/negative_009.png
+Number of raw matches between training and query:  68
+2020-11-02 23:53:33.130 Python[80757:1410116] ApplePersistenceIgnoreState: Existing state will not be touched. New state will be written to (null)
+Object not detected; can't fit an affine transform
+
+
+./query_images/negative_008.png
+Number of raw matches between training and query:  178
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_008.png
+Number of raw matches between training and query:  259
+Object detected! Found 24 inlier matches
+
+
+./query_images/positive_009.png
+Number of raw matches between training and query:  184
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_004.png
+Number of raw matches between training and query:  263
+Object detected! Found 42 inlier matches
+
+
+./query_images/positive_010.png
+Number of raw matches between training and query:  168
+Object not detected; can't fit an affine transform
+
+
+./query_images/negative_006.png
+Number of raw matches between training and query:  182
+Object not detected; can't fit an affine transform
+
+
+./query_images/negative_007.png
+Number of raw matches between training and query:  94
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_011.png
+Number of raw matches between training and query:  177
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_005.png
+Number of raw matches between training and query:  254
+Object detected! Found 17 inlier matches
+
+
+./query_images/positive_013.png
+Number of raw matches between training and query:  166
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_007.png
+Number of raw matches between training and query:  228
+Object detected! Found 29 inlier matches
+
+
+./query_images/negative_005.png
+Number of raw matches between training and query:  63
+Object not detected; can't fit an affine transform
+
+
+./query_images/negative_004.png
+Number of raw matches between training and query:  94
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_006.png
+Number of raw matches between training and query:  242
+Object detected! Found 24 inlier matches
+
+
+./query_images/positive_012.png
+Number of raw matches between training and query:  261
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_016.png
+Number of raw matches between training and query:  194
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_002.png
+Number of raw matches between training and query:  249
+Object detected! Found 21 inlier matches
+
+
+./query_images/negative_000.png
+Number of raw matches between training and query:  165
+Object not detected; can't fit an affine transform
+
+
+./query_images/negative_001.png
+Number of raw matches between training and query:  66
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_003.png
+Number of raw matches between training and query:  260
+Object detected! Found 25 inlier matches
+
+
+./query_images/positive_017.png
+Number of raw matches between training and query:  110
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_001.png
+Number of raw matches between training and query:  209
+Object detected! Found 15 inlier matches
+
+
+./query_images/positive_015.png
+Number of raw matches between training and query:  214
+Object detected! Found 26 inlier matches
+
+
+./query_images/negative_003.png
+Number of raw matches between training and query:  94
+Object not detected; can't fit an affine transform
+
+
+./query_images/negative_002.png
+Number of raw matches between training and query:  140
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_014.png
+Number of raw matches between training and query:  145
+Object not detected; can't fit an affine transform
+
+
+./query_images/positive_000.png
+Number of raw matches between training and query:  217
+Object detected! Found 30 inlier matches
+
+
+
+
+3) 
