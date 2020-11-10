@@ -35,7 +35,7 @@ def find_vanishing_point_directions(houghLines, bgr_img, num_to_find=3, K=None):
         # Eliminate contributing lines and repeat.
         houghLines = houghLines[contributing_lines == False]
 
-    return vanishing_directions
+    return vanishing_directions, bgr_display
 
 # This function uses RANSAC to find a set of line segments that fit a single vanishing point.
 # See this post:  https://yichaozhou.com/post/20190402vanishingpoint/

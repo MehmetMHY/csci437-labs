@@ -4,7 +4,7 @@ import numpy as np
 import vanishing as v
 
 def resize(bgr_img):
-    scale_percent = 35  # percent of original size
+    scale_percent = 30  # percent of original size
     width = int(bgr_img.shape[1] * scale_percent / 100)
     height = int(bgr_img.shape[0] * scale_percent / 100)
     dim = (width, height)
@@ -14,8 +14,10 @@ def resize(bgr_img):
 
     return bgr_img
 
-def main():
-    bgr_img = cv2.imread("chess.jpg")
+def main(filename, message):
+    print(message)
+
+    bgr_img = cv2.imread(filename)
 
     bgr_img = resize(bgr_img)
 
@@ -25,7 +27,7 @@ def main():
     image_width = bgr_img.shape[1]
     image_height = bgr_img.shape[0]
 
-    SIGMA_BLUR = 1.0;
+    SIGMA_BLUR = 1.0
 
     # Smooth the image with a Gaussian filter.  If sigma is not provided, it
     # computes it automatically using   sigma = 0.3*((ksize-1)*0.5 - 1) + 0.8.
@@ -46,6 +48,11 @@ def main():
         threshold1=thresh_canny,  # lower threshold
         threshold2=3 * thresh_canny,  # upper threshold
         L2gradient=True)  # use more accurate L2 norm
+
+    cv2.imwrite(str(filename[:-4])+"_Canny.png", edge_img)
+
+    cv2.imshow("project", edge_img)
+    cv2.waitKey(0)
 
     while np.sum(edge_img)/255 < MIN_FRACT_EDGES * (image_width * image_height):
         print("Decreasing threshold ...")
@@ -84,7 +91,27 @@ def main():
 
     print("Number of lines: %d" % len(houghLines))
 
-    houghLines = v.find_vanishing_point_directions(houghLines, bgr_img)
+    # create text file with the complete set of line segments found from HoughLinesP
+    output_name = str(filename[:-4]) + "_Line_Points_HoughLinesP.txt"
+    output = open(output_name, "a")
+    output.write("[Point 1] [Point 2] \n")
+    for i in range(len(houghLines)):
+        temp = houghLines[i]
+        x1, y1, x2, y2 = temp[0]
+        final = str([(x1, y1), (x2, y2)]) + "\n"
+        final = "(" + str(x1) + ", " + str(y1) + ")->(" + str(x2) + ", " + str(y2) + ") \n"
+        output.write(final)
+    output.close()
+    print(str(output_name) + " file with the complete set of line segments from HoughLinesP has been created!")
+
+    houghLines, final_img = v.find_vanishing_point_directions(houghLines, bgr_img)
+
+    print()
+
+    cv2.imwrite(str(filename[:-4])+"_final.png", final_img)
 
 if __name__ == "__main__":
-    main()
+    files = ["corridor1.jpg", "corridor2.jpg", "corridor3.png"]
+    for filename in files:
+        main(filename, str(filename + " is processing..."))
+    print("DONE")
