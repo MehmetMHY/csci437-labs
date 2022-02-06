@@ -9,7 +9,6 @@
 
 ## Credits:
 - There are Python scripts and/or segments of code that was provided by the CSCI437 class during lecture, in slides, or though Canvas. The CSCI437 class is provided at the Colorado School of Mines.
-
 - These labs were done with the following partners:
 	- Jean Duong
 	- Mehmet Yilmaz
