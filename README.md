@@ -1,7 +1,12 @@
-# CSCI437 Labs - Fall 2020
+<h1 align="center">CSCI437 Labs - Fall 2020</h1>
+<p align="center">
+  <img width="250" src="./assets/logo.png">
+</p>
 
-- Date Created: 8-28-2020
-- Date Concluded: 12-14-2020
+## Dates
+
+- Created: 8-28-2020
+- Concluded: 12-14-2020
 
 ## About
 
