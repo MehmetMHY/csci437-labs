@@ -14,7 +14,11 @@
 - These labs were a great for helping us learn Python OpenCV, so these labs will be refered back to in the future if need be.
 - This repo will stay private, due to this code is technology owned by the Colorado School of Mines.
 
-## [CSCI437](https://www.coursicle.com/mines/courses/CSCI/437/)
+## About The Class
+
+### Name
+
+[Introduction To Computer Vision (CSCI437)](https://www.coursicle.com/mines/courses/CSCI/437/)
 
 ### Description
 
