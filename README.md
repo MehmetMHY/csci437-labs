@@ -12,7 +12,6 @@
 
 - The following is a collection of all 10 labs done for the School of Mine's CSCI437, Intro To Computer Vision, class during the Fall 2020 semester year.
 - These labs were a great for helping us learn Python OpenCV, so these labs will be refered back to in the future if need be.
-- This repo will stay private, due to this code is technology owned by the Colorado School of Mines.
 
 ## About The Class
 
@@ -38,4 +37,9 @@ Fall 2020
 - These labs were done with the following partners:
 	- Jean Duong
 	- Mehmet Yilmaz
+
+## Notes
+
+- You will need to following 3rd party python packages to run these scripts/labs: cv2 & numpy
+- Some of these labs might require you to use a specific version of cv2. Sadly, the requirements were not documented, so you will have to figure this out on your own. If you do figure it out or you are stuck, please report it to the [issues form](https://github.com/MehmetMHY/csci437-labs/issues).
 
