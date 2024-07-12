@@ -1,12 +1,17 @@
 <h1 align="center">CSCI437 Labs - Fall 2020</h1>
 <p align="center">
-  <img width="250" src="./assets/logo.png">
+  <img width="150" src="./assets/logo.png">
 </p>
 
 ## Dates
 
 - Created: 8-28-2020
 - Concluded: 12-14-2020
+
+## Authors
+
+- Jean Duong
+- Mehmet Yilmaz
 
 ## About
 
@@ -31,15 +36,12 @@ William Hoff & Tom Williams
 
 Fall 2020
 
-## Credit
+## Credit(s)
 
 - There are Python scripts and/or segments of code that was provided by the CSCI437 class during lecture, in slides, or though Canvas. The CSCI437 class is provided at the Colorado School of Mines.
-- These labs were done with the following partners:
-	- Jean Duong
-	- Mehmet Yilmaz
 
 ## Notes
 
 - You will need to following 3rd party python packages to run these scripts/labs: cv2 & numpy
-- Some of these labs might require you to use a specific version of cv2. Sadly, the requirements were not documented, so you will have to figure this out on your own. If you do figure it out or you are stuck, please report it to the [issues form](https://github.com/MehmetMHY/csci437-labs/issues).
+- Some of these labs might require you to use a specific version of cv2. Sadly, the requirements were not documented, so you will have to figure this out on your own. If you do figure it out or you are stuck, please report it to the [issues form](https://github.com/MehmetMHY/csci437-labs/issues)
 
